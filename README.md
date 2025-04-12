@@ -2,8 +2,7 @@
 
 ## 📌 Project Overview
 
-This is a full-stack e-commerce website built with **Spring Boot** (backend) and **Angular** (frontend). The system supports:
-
+This is a full-stack e-commerce website developed using **Spring Boot** for the backend and **Angular** for the frontend. The system is designed to handle multiple user roles, including **Client**, **Supplier**, and **Administrator**, each with tailored access and functionalities. Key features include comprehensive **product management**, **shopping cart operations**, **order processing**, and **payment tracking**. The platform also supports secure **authentication**, responsive design for mobile compatibility, and can be extended with RESTful APIs for third-party integration.
 - Multiple user roles: **Client**, **Supplier**, **Admin**
 - Product management
 - Shopping cart functionality
@@ -16,34 +15,42 @@ This is a full-stack e-commerce website built with **Spring Boot** (backend) and
 
 ### Backend
 
-- Java 17
-- Spring Boot 3.x
-- Spring Data JPA
-- Hibernate (ORM)
-- Jakarta Persistence (JPA)
-- Maven (Dependency Management)
-- H2 Database (Development)
-- PostgresSQL (Production)
+ Java 17
+ Spring Boot 3.x
+ Spring Data JPA
+ Hibernate (ORM)
+ Jakarta Persistence (JPA)
+ Maven (Dependency Management)
+ H2 Database (Development)
+ PostgresSQL (Production)
 
 ### Frontend
 
 - Angular
 
----
-
-## 🗄️ Database Schema
+### 🗄️ Database Schema
 
 The application uses a relational database with the following key entities:
 
-Users (Base) ├── Clients ├── Fournisseurs (Suppliers) └── Admins
+<pre>
+Users (Base)
+├── Clients
+├── Fournisseurs (Suppliers)
+└── Admins
 
-Products ├── Categories (Many-to-Many) └── Fournisseurs (Many-to-One)
+Products
+├── Categories (Many-to-Many)
+└── Fournisseurs (Many-to-One)
 
-Orders ├── Clients (Many-to-One) ├── OrderItems └── Payments (One-to-One)
+Orders
+├── Clients (Many-to-One)
+├── OrderItems
+└── Payments (One-to-One)
 
-Carts ├── Clients (One-to-One) └── CartItems
-
-
+Carts
+├── Clients (One-to-One)
+└── CartItems
+</pre>
 ---
 
 ## 🚀 Getting Started
@@ -58,8 +65,13 @@ Carts ├── Clients (One-to-One) └── CartItems
 
 ### Installation
 
-1. **Clone the Repository**
+1. **Fork the Repository**
+
+Go to the original repository and click **Fork** to create your own copy.
+
+2. **Clone Your Forked Repository**
 
 ```bash
-git clone https://github.com/yourusername/ecommerce-website.git
-cd ecommerce-website
+git clone https://github.com/Mouadbouanani/e-ecommerce.git
+cd e-ecommerce
+
