@@ -1,40 +1,112 @@
 package com.ecommerce.model;
 
-
-
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "orders") // Avoid conflicts with SQL reserved word "Order"
+@Table(name = "orders")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    // Each order belongs to one client
+
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
-    // An order can contain multiple products
-    @OneToMany
-    private List<Product> productList;
 
-    private double totalPrice;
-    private String status; // e.g., "Pending", "Completed", "Cancelled"
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
 
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
+    @Column(nullable = false)
+    private Double totalPrice;
 
-    public Client getClient() { return client; }
-    public void setClient(Client client) { this.client = client; }
+    @Column(nullable = false)
+    private String status; // "PENDING", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED"
 
-    public List<Product> getProductList() { return productList; }
-    public void setProductList(List<Product> productList) { this.productList = productList; }
+    @Column(nullable = false)
+    private LocalDateTime orderDate;
 
-    public double getTotalPrice() { return totalPrice; }
-    public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
+    @Column
+    private LocalDateTime deliveryDate;
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
+
+    public Order() {
+        this.orderDate = LocalDateTime.now();
+        this.status = "PENDING";
+    }
+
+    public Order(Client client, Double totalPrice) {
+        this();
+        this.client = client;
+        this.totalPrice = totalPrice;
+    }
+
+    // Getters and Setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public LocalDateTime getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(LocalDateTime deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 }
-
